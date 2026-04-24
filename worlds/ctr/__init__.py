@@ -8,7 +8,7 @@ from BaseClasses import MultiWorld, Item, Tutorial, ItemClassification
 from worlds.AutoWorld import World, CollectionState, WebWorld
 from .Locations import get_location_names, get_total_locations
 from .Items import load_item_table, item_prefix
-from .Options import ctrAPOptions
+from .Options import Goal, ctrAPOptions
 from .Regions import create_regions
 from .Rom import CrashTeamRacingProcedurePatch, write_tokens
 from .Rules import set_rules
@@ -98,57 +98,23 @@ class ctrAPWorld(World):
         mw = self.multiworld
         pool = []
 
-        if self.options.goal.value <= 2:
-            victory = ctrAPItem(
-                name="Victory",
-                classification=ItemClassification.progression_skip_balancing,
-                code=None,
-                player=player,
-            )
+        evt_victory = ctrAPItem(
+            name="Victory",
+            classification=ItemClassification.progression_skip_balancing,
+            code=None,
+            player=player,
+        )
 
-            match self.options.goal.value:
-                case 0:
-                    mw.get_location(
-                        location_name="N. Oxide Garage: N. Oxide's Challenge",
-                        player=player,
-                    ).place_locked_item(victory)
-                    mw.completion_condition[player] = lambda state: state.has(
-                        item="Victory",
-                        player=player,
-                    )
-                case 1:
-                    mw.get_location(
-                        location_name="N. Oxide Garage: N. Oxide's Final Challenge",
-                        player=player,
-                    ).place_locked_item(victory)
-                    mw.completion_condition[player] = lambda state: state.has(
-                        item="Victory",
-                        player=player,
-                    )
-                case 2:
-                    mw.get_location(
-                        location_name="N. Oxide Garage: N. Oxide's Final Challenge",
-                        player=player,
-                    ).place_locked_item(victory)
-                    mw.completion_condition[player] = (
-                        lambda state:
-                            state.has("Victory", player)
-                            and state.has("Gold Relic", player, 18)
-                            and all(state.has(g, player, 1)
-                                    for g in ["Red Gem", "Green Gem", "Blue Gem", "Yellow Gem", "Purple Gem"]
-                                )
-                    )
-
-        elif self.options.goal.value >= 3:
-            match self.options.goal.value:
-                case 3:
-                    mw.completion_condition[player] = lambda state: state.has(
-                        item="Trophy",
-                        player=player,
-                        count=16,
-                    )
-                case 4:
-                    self.gemgoal(player)
+        match self.options.goal.value:
+            case Goal.option_oxide:
+                mw.get_location(
+                    location_name="N. Oxide Garage: N. Oxide's Challenge",
+                    player=player,
+                ).place_locked_item(evt_victory)
+                mw.completion_condition[player] = lambda state: state.has(
+                    item="Victory",
+                    player=player,
+                )
 
         # --- Create general item pool ---
         for item in load_item_table():
@@ -160,27 +126,6 @@ class ctrAPWorld(World):
         mw.itempool += pool
         mw.itempool += self.create_filler(
             (get_total_locations(self) - len(mw.itempool))
-        )
-
-    def gemgoal(self, player):
-        """Locks gem rewards in the appropriate Gem Cup locations."""
-        data_path = os.path.join(
-            os.path.dirname(
-                __file__
-            ),
-            "data",
-            "vanilla_mapping.json"
-        )
-        with open(data_path, "r", encoding="utf-8") as f:
-            _mapping = json.load(f)
-        mw = self.multiworld
-        for loc_name, gem_name in _mapping["ShuffleOptions"]["Gems"].items():
-            loc = mw.get_location(loc_name, player)
-            loc.place_locked_item(self.create_item(gem_name))
-
-        mw.completion_condition[player] = lambda state: all(
-            state.has(g, player, 1)
-            for g in ["Red Gem", "Green Gem", "Blue Gem", "Yellow Gem", "Purple Gem"]
         )
 
     def fill_slot_data(self) -> Dict[str, object]:
