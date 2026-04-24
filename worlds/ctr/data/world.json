@@ -245,7 +245,7 @@
             "type": "boss",
             "locations": [
                 {
-                    "name": "Ripper Roo Garage: Boss Race",
+                    "name": "Sewer Speedway: Boss Race",
                     "type": "boss"
                 }
             ],
@@ -441,7 +441,7 @@
             "type": "cup",
             "locations": [
                 {
-                    "name": "Red Gem Cup: Gem",
+                    "name": "Red Gem Cup",
                     "type": "gem"
                 }
             ],
@@ -459,7 +459,7 @@
             "type": "cup",
             "locations": [
                 {
-                    "name": "Green Gem Cup: Gem",
+                    "name": "Green Gem Cup",
                     "type": "gem"
                 }
             ],
@@ -477,7 +477,7 @@
             "type": "cup",
             "locations": [
                 {
-                    "name": "Blue Gem Cup: Gem",
+                    "name": "Blue Gem Cup",
                     "type": "gem"
                 }
             ],
@@ -495,7 +495,7 @@
             "type": "cup",
             "locations": [
                 {
-                    "name": "Yellow Gem Cup: Gem",
+                    "name": "Yellow Gem Cup",
                     "type": "gem"
                 }
             ],
@@ -513,7 +513,7 @@
             "type": "cup",
             "locations": [
                 {
-                    "name": "Purple Gem Cup: Gem",
+                    "name": "Purple Gem Cup",
                     "type": "gem"
                 }
             ],
@@ -743,7 +743,7 @@
             "type": "boss",
             "locations": [
                 {
-                    "name": "Papu Papu Garage: Boss Race",
+                    "name": "Papu's Pyramid: Boss Race",
                     "type": "boss"
                 }
             ],
@@ -991,7 +991,7 @@
             "type": "boss",
             "locations": [
                 {
-                    "name": "Komodo Joe Garage: Boss Race",
+                    "name": "Dragon Mines: Boss Race",
                     "type": "boss"
                 }
             ],
@@ -1232,7 +1232,7 @@
             "type": "boss",
             "locations": [
                 {
-                    "name": "Pinstripe Garage: Boss Race",
+                    "name": "Hot Air Skyway: Boss Race",
                     "type": "boss"
                 }
             ],
