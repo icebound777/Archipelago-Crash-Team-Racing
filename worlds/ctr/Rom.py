@@ -106,7 +106,10 @@ def get_ctr_database(item_placement: Iterable[Location]) -> dict:
 
     # Write item placement
     for location in item_placement:
-        track_name: str = location.name[:location.name.find(":")]
+        if ":" in location.name:
+            track_name: str = location.name[:location.name.find(":")]
+        else:
+            track_name: str = location.name
         race_name: str = location.name[location.name.find(":") + 2:]
 
         db_race_key = (
@@ -116,6 +119,7 @@ def get_ctr_database(item_placement: Iterable[Location]) -> dict:
             else "Gold Relic" if race_name == "Gold Time Trial"
             else "Platinum Relic" if race_name == "Platinum Time Trial"
             else "Key" if race_name == "Boss Race"
+            else location.name[:-4] if location.name.endswith("Gem Cup")
             else "INVALID"
         )
         if db_race_key == "INVALID":
