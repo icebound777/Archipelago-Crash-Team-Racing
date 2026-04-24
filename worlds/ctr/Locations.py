@@ -12,7 +12,11 @@ _LOCATION_DATA = json.loads(
 )
 
 
-CTR_LOCATION_IDS = {loc["name"]: loc["code"] for loc in _LOCATION_DATA}
+CTR_LOCATION_IDS = {
+    loc["name"]: loc["code"]
+    for loc in _LOCATION_DATA
+    if loc["code"] is not None
+}
 CTR_LOCATION_TO_REGION = {loc["name"]: loc["region"] for loc in _LOCATION_DATA}
 
 
