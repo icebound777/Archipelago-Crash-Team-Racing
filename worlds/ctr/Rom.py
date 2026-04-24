@@ -37,7 +37,7 @@ def write_tokens(
     patch: CrashTeamRacingProcedurePatch,
     item_placement: Iterable[Location],
 ) -> None:
-    options_adress: int = 0xF1EC
+    options_adress: int = 0xF220
 
     ctr_database: dict = get_ctr_database(item_placement)
 
