@@ -91,10 +91,7 @@ class ctrAPWorld(World):
             )
 
     def create_filler(self, count: int) -> List[Item]:
-        junk_pool: List[Item] = []
-        for _ in range(count):
-            junk_pool.append(self.create_item("Wumpa Fruit"))
-        return junk_pool
+        return []
 
     def create_items(self):
         player = self.player

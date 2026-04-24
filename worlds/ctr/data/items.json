@@ -13,6 +13,5 @@
   {"name": "Blue Gem", "count": 1, "classification": "progression"},
   {"name": "Yellow Gem", "count": 1, "classification": "progression"},
   {"name": "Purple Gem", "count": 1, "classification": "progression"},
-  {"name": "Key", "count": 4, "classification": "progression"},
-  {"name": "Wumpa Fruit", "count": 1, "classification": "filler"}
+  {"name": "Key", "count": 4, "classification": "progression"}
 ]
