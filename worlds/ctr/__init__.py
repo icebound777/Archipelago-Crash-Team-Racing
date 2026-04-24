@@ -116,6 +116,21 @@ class ctrAPWorld(World):
                     player=player,
                 )
 
+                evt_dummy = ctrAPItem(
+                    name="OverAchiever",
+                    classification=ItemClassification.progression_skip_balancing,
+                    code=None,
+                    player=player,
+                )
+                mw.get_location(
+                    location_name="N. Oxide Garage: N. Oxide's Final Challenge",
+                    player=player,
+                ).place_locked_item(evt_dummy)
+                mw.completion_condition[player] = lambda state: state.has(
+                    item="OverAchiever",
+                    player=player,
+                )
+
         # --- Create general item pool ---
         for item in load_item_table():
             count = item["count"]
