@@ -7,12 +7,23 @@ import pkgutil
 
 from BaseClasses import Location
 from settings import get_settings
-from worlds.Files import APProcedurePatch, APTokenMixin, APTokenTypes
+from worlds.Files import APProcedurePatch, APTokenMixin, APTokenTypes, APPatchExtension
+from .EdcEcc_Calc import full_recalc_edc_ecc
 
 
 FILENAME_CTR_TOKEN_BINARY: str = "ctr_token_data.bin"
 MARKER_INTERNAL_DB_START: list = [0xDB, 0xDA, 0x00, 0x0D, 0xDB, 0xDA]
 MARKER_INTERNAL_DB_END: list = [0xDB, 0xDA, 0xAA, 0x0D, 0xDB, 0xDD, 0xFF, 0xFF]
+
+
+class CrashTeamRacingPatchExtensions(APPatchExtension):
+    game = "Crash Team Racing"
+
+    @staticmethod
+    def calculate_edc_ecc(caller: APProcedurePatch, rom: bytes) -> bytes:
+        rom_data = bytearray(rom)
+
+        return bytes(full_recalc_edc_ecc(rom_data))
 
 
 class CrashTeamRacingProcedurePatch(APProcedurePatch, APTokenMixin):
@@ -24,6 +35,7 @@ class CrashTeamRacingProcedurePatch(APProcedurePatch, APTokenMixin):
     procedure = [
         ("apply_bsdiff4", ["base_patch.bsdiff4"]),
         ("apply_tokens", [FILENAME_CTR_TOKEN_BINARY]),
+        ("calculate_edc_ecc", []),
     ]
 
     @classmethod
